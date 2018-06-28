@@ -21,6 +21,11 @@ namespace Demo.WebJob
                 config.UseDevelopmentSettings();
             }
 
+            config.UseTimers();
+            config.Queues.MaxDequeueCount = 2;
+            config.Queues.MaxPollingInterval = TimeSpan.FromSeconds(4);
+            config.Queues.BatchSize = 2;
+
             var host = new JobHost(config);
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
